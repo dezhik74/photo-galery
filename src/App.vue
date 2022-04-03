@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     showLB (photo) {
-      console.log("click")
       this.selectedPhoto = photo
       if (!photo.likes) Vue.set(photo, "likes", 0)
       if (!photo.comments) Vue.set(photo, "comments", [])
@@ -56,7 +55,6 @@ export default {
       photo.likes ++
     },
     addComment (photo, newValue) {
-      // console.log(photo, newValue)
       photo.comments.push(newValue)
     },
     closeLB () {
@@ -89,6 +87,7 @@ export default {
   row-gap: 8px; */
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 
 }
 

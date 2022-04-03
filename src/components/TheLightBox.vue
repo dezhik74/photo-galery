@@ -1,6 +1,6 @@
 <template>
     <div class="backdrop" @click="$emit('close-lb', photo)">
-        <div class="lb-container" @click.stop>
+        <div class="lb-container" @click.stop ref="lbContainer">
             <button class="close-button" @click="$emit('close-lb', photo)">X</button>
             <h3>{{ photo.title }}</h3>
             <img class="image" :src="photo.url" :alt="photo.id" />
@@ -17,7 +17,7 @@
                         {{ comment }}
                     </div>
                     <div class="input-comment">
-                        <input type="text" placeholder="новый коммент" v-model="commentValue" ref="commentInput" />
+                        <input type="text" placeholder="новый коммент" v-model="commentValue" ref="commentInput" @keyup.enter="addComment"/>
                         <button class="like-button add-comment-button" @click="addComment">+</button>
                     </div>
                 </div>
@@ -46,6 +46,7 @@ export default {
       this.commentValue = "";
       // console.log(this.$refs.commentInput);
       this.$refs.commentInput.focus();
+      this.$refs.lbContainer.scrollTop = this.$refs.lbContainer.scrollTop + 18
     },
   },
 };
@@ -53,19 +54,13 @@ export default {
 
 <style scoped>
 .lb-container {
-  /* max-width: 80%;
-  margin: auto;
-  border: 1px green solid; */
-  /* top: 4px; */
   padding: 20px;
-  /* left: 50%; */
-  /* margin-left:-25%; */
-  /* transform: translateX(-50%); */
-  /* position: fixed; */
-  max-width: 70%;
+  max-width: 900px;
   margin: auto;
   z-index: 101;
   background-color: white;
+  overflow-y: auto;
+  max-height: 90%;
   border-radius: 10px;
   animation: photo-anime 500ms;
 }
